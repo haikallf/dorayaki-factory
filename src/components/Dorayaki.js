@@ -19,6 +19,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Header from "./Header";
 
 function Dorayaki() {
   const [rows, setRows] = useState([]);
@@ -120,82 +121,87 @@ function Dorayaki() {
   };
 
   return (
-    <div className="dorayaki">
-      <div>
-        <Button
-          variant="contained"
-          style={{
-            backgroundColor: "rgb(0, 180, 255)",
-            marginLeft: "70px",
-            marginTop: "30px",
-          }}
-          onClick={handleClickOpen}
-        >
-          Tambah Dorayaki
-        </Button>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Tambah Dorayaki</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Masukkan nama dorayaki yang diinginkan
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Nama Dorayaki"
-              type="text"
-              fullWidth
-              variant="standard"
-              value={namaDorayaki}
-              onChange={(e) => {
-                setNamaDorayaki(e.target.value);
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={tambahDorayaki}>Tambah</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-      <div className="dorayaki__form">
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">ID Dorayaki</TableCell>
-                <TableCell align="center">Nama Dorayaki</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={row.name}>
-                    <TableCell align="center">{row.idItem}</TableCell>
-                    <TableCell align="center">{row.nama}</TableCell>
-                  </TableRow>
-                ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+    <>
+      <Header />
+      <div className="blank"></div>
+
+      <div className="dorayaki">
+        <div>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "rgb(0, 180, 255)",
+              marginLeft: "70px",
+              marginTop: "30px",
+            }}
+            onClick={handleClickOpen}
+          >
+            Tambah Dorayaki
+          </Button>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Tambah Dorayaki</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Masukkan nama dorayaki yang diinginkan
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Nama Dorayaki"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={namaDorayaki}
+                onChange={(e) => {
+                  setNamaDorayaki(e.target.value);
+                }}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={tambahDorayaki}>Tambah</Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+        <div className="dorayaki__form">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">ID Dorayaki</TableCell>
+                  <TableCell align="center">Nama Dorayaki</TableCell>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow key={row.name}>
+                      <TableCell align="center">{row.idItem}</TableCell>
+                      <TableCell align="center">{row.nama}</TableCell>
+                    </TableRow>
+                  ))}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

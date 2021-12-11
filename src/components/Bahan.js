@@ -13,6 +13,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
+import Header from "./Header";
 
 function Bahan() {
   const [bahan, setBahan] = useState([]);
@@ -85,70 +86,75 @@ function Bahan() {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <div className="bahan">
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: "rgb(0, 180, 255)",
-          marginLeft: "70px",
-          marginTop: "30px",
-        }}
-        onClick={() => history.push("/addbahan")}
-      >
-        Tambah Bahan
-      </Button>
-      <div className="bahan__form">
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">ID Item</TableCell>
-                <TableCell align="center">Nama Bahan</TableCell>
-                <TableCell align="center">Stok Bahan</TableCell>
-                <TableCell align="center">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={row.name}>
-                    <TableCell align="center">{row.idBahan}</TableCell>
-                    <TableCell align="center">{row.namaBahan}</TableCell>
-                    <TableCell align="center">{row.stokBahan}</TableCell>
-                    <TableCell align="center">
-                      <Button
-                        variant="outlined"
-                        style={{
-                          borderColor: "rgb(10, 153, 6)",
-                          color: "rgb(10, 153, 6)",
-                        }}
-                        onClick={() => goToEditPage(row.idBahan)}
-                      >
-                        Edit
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+    <>
+      <Header />
+      <div className="blank"></div>
+
+      <div className="bahan">
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "rgb(0, 180, 255)",
+            marginLeft: "70px",
+            marginTop: "30px",
+          }}
+          onClick={() => history.push("/addbahan")}
+        >
+          Tambah Bahan
+        </Button>
+        <div className="bahan__form">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">ID Item</TableCell>
+                  <TableCell align="center">Nama Bahan</TableCell>
+                  <TableCell align="center">Stok Bahan</TableCell>
+                  <TableCell align="center">Action</TableCell>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow key={row.name}>
+                      <TableCell align="center">{row.idBahan}</TableCell>
+                      <TableCell align="center">{row.namaBahan}</TableCell>
+                      <TableCell align="center">{row.stokBahan}</TableCell>
+                      <TableCell align="center">
+                        <Button
+                          variant="outlined"
+                          style={{
+                            borderColor: "rgb(10, 153, 6)",
+                            color: "rgb(10, 153, 6)",
+                          }}
+                          onClick={() => goToEditPage(row.idBahan)}
+                        >
+                          Edit
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

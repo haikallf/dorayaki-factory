@@ -15,8 +15,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
-        <div className="blank"></div>
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />

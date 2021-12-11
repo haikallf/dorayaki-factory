@@ -13,6 +13,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import Header from "./Header";
 
 function Request() {
   const [request, setRequest] = useState([]);
@@ -89,74 +90,79 @@ function Request() {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <div className="request">
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">ID Request</TableCell>
-              <TableCell align="center">ID Item</TableCell>
-              <TableCell align="center">Username</TableCell>
-              <TableCell align="center">Quantity</TableCell>
-              <TableCell align="center">Waktu Request</TableCell>
-              <TableCell align="center">Status</TableCell>
-              <TableCell align="center">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
-                <TableRow key={row.name}>
-                  <TableCell align="center">{row.idRequest}</TableCell>
-                  <TableCell align="center">{row.idItem}</TableCell>
-                  <TableCell align="center">{row.username}</TableCell>
-                  <TableCell align="center">{row.quantity}</TableCell>
-                  <TableCell align="center">{row.timestamp}</TableCell>
-                  <TableCell align="center">{row.status}</TableCell>
-                  <TableCell align="center">
-                    <Button
-                      variant="outlined"
-                      style={{
-                        borderColor: "rgb(10, 153, 6)",
-                        color: "rgb(10, 153, 6)",
-                      }}
-                      onClick={() => acceptRequest(row.idRequest)}
-                    >
-                      Accept
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      style={{
-                        borderColor: "rgb(172, 4, 4)",
-                        color: "rgb(172, 4, 4)",
-                        marginLeft: "10px",
-                      }}
-                      onClick={() => declineRequest(row.idRequest)}
-                    >
-                      Decline
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+    <>
+      <Header />
+      <div className="blank"></div>
+
+      <div className="request">
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">ID Request</TableCell>
+                <TableCell align="center">ID Item</TableCell>
+                <TableCell align="center">Username</TableCell>
+                <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Waktu Request</TableCell>
+                <TableCell align="center">Status</TableCell>
+                <TableCell align="center">Action</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </TableContainer>
-    </div>
+            </TableHead>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <TableRow key={row.name}>
+                    <TableCell align="center">{row.idRequest}</TableCell>
+                    <TableCell align="center">{row.idItem}</TableCell>
+                    <TableCell align="center">{row.username}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="center">{row.timestamp}</TableCell>
+                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">
+                      <Button
+                        variant="outlined"
+                        style={{
+                          borderColor: "rgb(10, 153, 6)",
+                          color: "rgb(10, 153, 6)",
+                        }}
+                        onClick={() => acceptRequest(row.idRequest)}
+                      >
+                        Accept
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        style={{
+                          borderColor: "rgb(172, 4, 4)",
+                          color: "rgb(172, 4, 4)",
+                          marginLeft: "10px",
+                        }}
+                        onClick={() => declineRequest(row.idRequest)}
+                      >
+                        Decline
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      </div>
+    </>
   );
 }
 
