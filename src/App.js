@@ -18,7 +18,7 @@ function App() {
         <Header />
         <div className="blank"></div>
         <Switch>
-          <Route exact path="/" component={Dorayaki} />
+          <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/dorayaki" component={Dorayaki} />
