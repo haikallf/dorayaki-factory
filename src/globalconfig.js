@@ -1,1 +1,1 @@
-exports.url = "https://dorayaki-factory-heroku.herokuapp.com/";
+export const url = "https://dorayaki-factory-heroku.herokuapp.com";
